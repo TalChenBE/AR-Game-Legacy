@@ -18,22 +18,18 @@ public class MoveUserTank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 currentPosition = this.GetComponent<Rigidbody>().transform.position;
-        Vector3 nextPosition = currentPosition;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(x, 0, z);
 
-        if (Input.GetKey(KeyCode.DownArrow)) {
-            nextPosition.z -= 1;
-            this.GetComponent<Rigidbody>().transform.position = Vector3.MoveTowards(currentPosition, nextPosition, speed*Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.UpArrow)) {
-            nextPosition.z += 1;
-            this.GetComponent<Rigidbody>().transform.position = Vector3.MoveTowards(currentPosition, nextPosition, speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            transform.Rotate(0, rotationAngle, 0);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            transform.Rotate(0, -rotationAngle, 0);
+        transform.Translate(movement * speed * Time.deltaTime);
+
+
+        if (x != 0)
+        {
+            // rotate the object according to its movment in the Horizontal axis
+            int side = x < 0 ? -1 : 1;
+            transform.Rotate(0, rotationAngle * side, 0);
         }
     }
 }
