@@ -8,6 +8,7 @@ public class ShootGun : MonoBehaviour
     public GameObject prefeb;
     public GameObject smallExplosion;
     public GameObject rocketTrail;
+    public float initXRotation;
     [SerializeField] public Button shootBtn;
     public float speed;
     public float yRotation;
@@ -35,7 +36,7 @@ public class ShootGun : MonoBehaviour
         roccket.tag = "tank_bullet";
         Rigidbody roccektRigid = roccket.AddComponent<Rigidbody>();
         roccket.AddComponent<BoxCollider>();
-        roccektRigid.AddForce(transform.forward * speed);
+        roccektRigid.AddForce(-transform.up * speed);
         Destroy(roccket, 1);
         Destroy(a.createdRocketTrail, 2.5f);
     }

@@ -11,11 +11,20 @@ public class MoveEnemyTank : MonoBehaviour
     public GameObject explosion;
     public GameObject fire;
     public GameObject smoke;
+    public GameObject locationCircle;
     private ParticleSystem particleConfig;
     private bool isHit = false;
 
+    private void Start()
+    {
+        Vector3 locationCircleRotation = new Vector3(90, 0, 0);
+        locationCircle = Instantiate(locationCircle, transform.position, Quaternion.Euler(locationCircleRotation));
+        locationCircle.transform.localScale = new Vector3(4, 3, 1);
+    }
+
     private void FixedUpdate()
     {
+        locationCircle.transform.position = transform.position;
         agent.SetDestination(destination.position);
         if (isHit)
         {
