@@ -12,9 +12,11 @@ public class MoveUserTank : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     public GameObject locationCircle;
     public bool isUserMoved;
+    public MoveForward moveForward;
 
     void Start()
     {
+        _joystick.enabled = false;
         isUserMoved = false;
         _moveSpeed = 2;
         Vector3 locationCircleRotation = new Vector3(90, 0, 0);
@@ -24,6 +26,9 @@ public class MoveUserTank : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (moveForward.isPlay && moveForward.audioSource.isPlaying == false)
+            _joystick.enabled = true;
+
         locationCircle.transform.position = transform.position;
         _rigidbody.velocity = new Vector3(_joystick.Horizontal * _moveSpeed, 0, _joystick.Vertical * _moveSpeed);
 

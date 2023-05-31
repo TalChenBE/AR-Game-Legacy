@@ -13,6 +13,7 @@ public class MoveEnemyTank : MonoBehaviour
     public GameObject smoke;
     public GameObject locationCircle;
     private ParticleSystem particleConfig;
+    public HideVideo hideVideo;
     private bool isHit = false;
 
     private void Start()
@@ -24,6 +25,8 @@ public class MoveEnemyTank : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (hideVideo.isDestroy == false)
+            return;
         locationCircle.transform.position = transform.position;
         agent.SetDestination(destination.position);
         if (isHit)

@@ -12,12 +12,20 @@ public class ShootGun : MonoBehaviour
     [SerializeField] public Button shootBtn;
     public float speed;
     public float yRotation;
+    public MoveForward moveForward;
     void Start()
     {
+        shootBtn.enabled = false;
         /*  Quaternion rotations = transform.rotation;
            transform.rotation = Quaternion.AngleAxis(r, toEnemy);*/
         shootBtn.onClick.AddListener(createTankBullet);
         // Set the emission rate of the particle system
+    }
+
+    private void FixedUpdate()
+    {
+        if (moveForward.isPlay && moveForward.audioSource.isPlaying == false)
+            shootBtn.enabled = true;
     }
 
     void createTankBullet()
