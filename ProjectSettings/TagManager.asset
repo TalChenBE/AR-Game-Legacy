@@ -6,6 +6,9 @@ TagManager:
   tags:
   - tank_bullet
   - rocket
+  - User
+  - IsraelTank
+  - tank_bullet_enemy
   layers:
   - Default
   - TransparentFX

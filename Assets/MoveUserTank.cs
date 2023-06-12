@@ -14,6 +14,8 @@ public class MoveUserTank : MonoBehaviour
     public bool isUserMoved;
     public MoveForward moveForward;
 
+    public GameObject explosion;
+
     void Start()
     {
         _joystick.enabled = false;
@@ -36,6 +38,15 @@ public class MoveUserTank : MonoBehaviour
         {
             isUserMoved = true;
             transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "tank_bullet")
+        {
+            GameObject explosionAloc = Instantiate(explosion, collision.contacts[0].point, transform.localRotation);
+            Destroy(explosionAloc, 1);
         }
     }
 }

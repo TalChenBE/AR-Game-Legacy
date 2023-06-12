@@ -14,14 +14,14 @@ public class FollowRocket : MonoBehaviour
         Vector3 rotation = transform.localRotation.eulerAngles;
         rotation.y += 90;
         rotation.x -= initXRotation;
-        createdRocketTrail = Instantiate(rocketTrail, transform.localPosition, Quaternion.Euler(rotation));
-        ParticleSystem rocket = createdRocketTrail.GetComponent<ParticleSystem>();
+        ParticleSystem rocket = rocketTrail.GetComponent<ParticleSystem>();
         var main = rocket.main;
         main.duration = 50;
         main.startSpeed = 52;
         main.startLifetime = 250;
         ParticleSystem.ShapeModule curve = rocket.shape;
         curve.position = transform.localPosition;
+        createdRocketTrail = Instantiate(rocketTrail, transform.localPosition, Quaternion.Euler(rotation));
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -29,6 +29,7 @@ public class MoveEnemyTank : MonoBehaviour
             return;
         locationCircle.transform.position = transform.position;
         agent.SetDestination(destination.position);
+
         if (isHit)
         {
             fire = Instantiate(fire, transform.position, transform.localRotation);

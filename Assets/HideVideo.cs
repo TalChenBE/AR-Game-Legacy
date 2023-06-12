@@ -8,19 +8,34 @@ public class HideVideo : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
     public GameObject canvas;
+    public GameObject btnCanvas;
+    public Button skipBtn;
     public bool isPlayerStarted = false;
     public bool isDestroy = false;
+
+    void Start()
+    {
+        skipBtn.enabled = true;
+        skipBtn.onClick.AddListener(skipVideo);
+    }
+
+    void skipVideo()
+    {
+        Destroy(canvas.gameObject);
+        Destroy(btnCanvas.gameObject);
+        videoPlayer.Stop();
+        isDestroy = true;
+    }
 
     void Update()
     {
         if (isPlayerStarted == false && videoPlayer.isPlaying == true)
         {
-            // When the player is started, set this information
             isPlayerStarted = true;
         }
         if (isPlayerStarted == true && videoPlayer.isPlaying == false)
         {
-            // When the player stopped playing, remove it
+            Destroy(btnCanvas.gameObject);
             Destroy(canvas.gameObject);
             isDestroy = true;
         }
